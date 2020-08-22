@@ -37,6 +37,7 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
+    void Reticle();
 private:
 	MainWindow& wnd;
 	Graphics gfx;
