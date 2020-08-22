@@ -42,4 +42,27 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+    Reticle();
+}
+
+void Game::Reticle()
+{
+    float x = int(700.0f);
+    float y = int(500.0f);
+
+    gfx.PutPixel(x - 5, y, 255, 255, 255);
+    gfx.PutPixel(x - 4, y, 255, 255, 255);
+    gfx.PutPixel(x - 3, y, 255, 255, 255);
+
+    gfx.PutPixel(x + 2, y, 255, 255, 255);
+    gfx.PutPixel(x + 3, y, 255, 255, 255);
+    gfx.PutPixel(x + 4, y, 255, 255, 255);
+
+    gfx.PutPixel(x, y - 5, 255, 255, 255);
+    gfx.PutPixel(x, y - 4, 255, 255, 255);
+    gfx.PutPixel(x, y - 3, 255, 255, 255);
+
+    gfx.PutPixel(x, y + 2, 255, 255, 255);
+    gfx.PutPixel(x, y + 3, 255, 255, 255);
+    gfx.PutPixel(x, y + 4, 255, 255, 255);
 }
