@@ -38,10 +38,20 @@ private:
 	/*  User Functions              */
 	/********************************/
     void Reticle();
+    void WallCollision();
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+    float x;
+    float y;
+    float velX;
+    float velY;
+    float r = int(255.0f);
+    float g = int(255.0f);
+    float b = int(255.0f);
+    bool shapeIschanged = false;
+    bool colorIsChaged = false;
 };
