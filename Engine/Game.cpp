@@ -24,7 +24,11 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+    x(400.0f),
+    y(300.0f),
+    velX(0.0f),
+    velY(0.0f)
 {
 }
 
@@ -38,7 +42,39 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-    
+    if (wnd.kbd.KeyIsPressed(VK_LEFT))
+    {
+        velX -= 0.5f;
+    }
+    else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+    {
+        velX += 0.5f;
+    }
+
+    if (wnd.kbd.KeyIsPressed(VK_UP))
+    {
+        velY -= 0.5f;
+    }
+    else if (wnd.kbd.KeyIsPressed(VK_DOWN))
+    {
+        velY += 0.5f;
+    }
+
+    if (x >= 300.0f && x <= 500.0f)
+    {
+        colorIsChaged = true;
+    }
+    else
+    {
+        colorIsChaged = false;
+    }
+
+    x += velX;
+    y += velY;
+
+    WallCollision();
+    shapeIschanged = wnd.kbd.KeyIsPressed(VK_SPACE);
+    //colorIsChaged = wnd.kbd.KeyIsPressed(VK_SHIFT);
 }
 
 void Game::ComposeFrame()
@@ -48,36 +84,16 @@ void Game::ComposeFrame()
 
 void Game::Reticle()
 {
-    float x = int(400.0f);
-    float y = int(300.0f);
-    float r = int(255.0f);
-    float g = int(255.0f);
-    float b = int(255.0f);
-
-    if (wnd.kbd.KeyIsPressed(VK_LEFT))
-    {
-        x -= 30;
-    }
-    else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-    {
-        x += 30;
-    }
-
-    if (wnd.kbd.KeyIsPressed(VK_UP))
-    {
-        y -= 30;
-    }
-    else if (wnd.kbd.KeyIsPressed(VK_DOWN))
-    {
-        y += 30;
-    }
-
-    if (wnd.kbd.KeyIsPressed(VK_SHIFT))
+    if (colorIsChaged)
     {
         r = 0;
     }
+    else
+    {
+        r = 255;
+    }
 
-    if(wnd.kbd.KeyIsPressed(VK_SPACE))
+    if(shapeIschanged)
     { 
         gfx.PutPixel(x - 6, y - 6, r, g, b);
         gfx.PutPixel(x - 5, y - 6, r, g, b);
@@ -113,7 +129,7 @@ void Game::Reticle()
         gfx.PutPixel(x + 6, y - 6, r, g, b);
         gfx.PutPixel(x + 6, y - 5, r, g, b);
         gfx.PutPixel(x + 6, y - 4, r, g, b);
-        gfx.PutPixel(x + 6, y - 3, r, g, b);
+        gfx.PutPixel(x + 6, y -  3, r, g, b);
        
     }
     else
@@ -133,5 +149,32 @@ void Game::Reticle()
         gfx.PutPixel(x, y + 2, r, g, b);
         gfx.PutPixel(x, y + 3, r, g, b);
         gfx.PutPixel(x, y + 4, r, g, b);
+    }
+}
+
+void Game::WallCollision() 
+{
+    if (x + 6 >= gfx.ScreenWidth - 1)
+    {
+        x = gfx.ScreenWidth - 7;
+        velX = 0.0f;
+    }
+
+    if (x - 6 <= 0)
+    {
+        x = 6;
+        velX = 0.0f;
+    }
+
+    if (y + 6 >= gfx.ScreenHeight - 1)
+    {
+        y = gfx.ScreenHeight - 7;
+        velY = 0.0f;
+    }
+
+    if (y - 6 <= 0)
+    {
+        y = 6;
+        velY = 0.0f;
     }
 }
