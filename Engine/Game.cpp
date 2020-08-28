@@ -27,6 +27,8 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
     x(400.0f),
     y(300.0f),
+    x2(200.0f),
+    y2(400.0f),
     velX(0.0f),
     velY(0.0f)
 {
@@ -44,23 +46,23 @@ void Game::UpdateModel()
 {
     if (wnd.kbd.KeyIsPressed(VK_LEFT))
     {
-        velX -= 0.5f;
+        velX -= 0.1f;
     }
     else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
     {
-        velX += 0.5f;
+        velX += 0.1f;
     }
 
     if (wnd.kbd.KeyIsPressed(VK_UP))
     {
-        velY -= 0.5f;
+        velY -= 0.1f;
     }
     else if (wnd.kbd.KeyIsPressed(VK_DOWN))
     {
-        velY += 0.5f;
+        velY += 0.1f;
     }
 
-    if (x >= 300.0f && x <= 500.0f)
+    if (CollisionDetection())
     {
         colorIsChaged = true;
     }
@@ -84,6 +86,9 @@ void Game::ComposeFrame()
 
 void Game::Reticle()
 {
+    FirstBox();
+    SecondBox();
+
     if (colorIsChaged)
     {
         r = 0;
@@ -93,7 +98,7 @@ void Game::Reticle()
         r = 255;
     }
 
-    if(shapeIschanged)
+   /* if(shapeIschanged)
     { 
         gfx.PutPixel(x - 6, y - 6, r, g, b);
         gfx.PutPixel(x - 5, y - 6, r, g, b);
@@ -129,7 +134,7 @@ void Game::Reticle()
         gfx.PutPixel(x + 6, y - 6, r, g, b);
         gfx.PutPixel(x + 6, y - 5, r, g, b);
         gfx.PutPixel(x + 6, y - 4, r, g, b);
-        gfx.PutPixel(x + 6, y -  3, r, g, b);
+        gfx.PutPixel(x + 6, y - 3, r, g, b);
        
     }
     else
@@ -149,7 +154,7 @@ void Game::Reticle()
         gfx.PutPixel(x, y + 2, r, g, b);
         gfx.PutPixel(x, y + 3, r, g, b);
         gfx.PutPixel(x, y + 4, r, g, b);
-    }
+    }*/
 }
 
 void Game::WallCollision() 
@@ -177,4 +182,88 @@ void Game::WallCollision()
         y = 6;
         velY = 0.0f;
     }
+}
+
+void Game::FirstBox()
+{
+    gfx.PutPixel(x - 6, y - 6, r, g, b);
+    gfx.PutPixel(x - 5, y - 6, r, g, b);
+    gfx.PutPixel(x - 4, y - 6, r, g, b);
+    gfx.PutPixel(x - 3, y - 6, r, g, b);
+    gfx.PutPixel(x - 6, y - 6, r, g, b);
+    gfx.PutPixel(x - 6, y - 5, r, g, b);
+    gfx.PutPixel(x - 6, y - 4, r, g, b);
+    gfx.PutPixel(x - 6, y - 3, r, g, b);
+
+    gfx.PutPixel(x + 6, y + 6, r, g, b);
+    gfx.PutPixel(x + 5, y + 6, r, g, b);
+    gfx.PutPixel(x + 4, y + 6, r, g, b);
+    gfx.PutPixel(x + 3, y + 6, r, g, b);
+    gfx.PutPixel(x + 6, y + 6, r, g, b);
+    gfx.PutPixel(x + 6, y + 5, r, g, b);
+    gfx.PutPixel(x + 6, y + 4, r, g, b);
+    gfx.PutPixel(x + 6, y + 3, r, g, b);
+
+    gfx.PutPixel(x - 6, y + 6, r, g, b);
+    gfx.PutPixel(x - 5, y + 6, r, g, b);
+    gfx.PutPixel(x - 4, y + 6, r, g, b);
+    gfx.PutPixel(x - 3, y + 6, r, g, b);
+    gfx.PutPixel(x - 6, y + 6, r, g, b);
+    gfx.PutPixel(x - 6, y + 5, r, g, b);
+    gfx.PutPixel(x - 6, y + 4, r, g, b);
+    gfx.PutPixel(x - 6, y + 3, r, g, b);
+
+    gfx.PutPixel(x + 6, y - 6, r, g, b);
+    gfx.PutPixel(x + 5, y - 6, r, g, b);
+    gfx.PutPixel(x + 4, y - 6, r, g, b);
+    gfx.PutPixel(x + 3, y - 6, r, g, b);
+    gfx.PutPixel(x + 6, y - 6, r, g, b);
+    gfx.PutPixel(x + 6, y - 5, r, g, b);
+    gfx.PutPixel(x + 6, y - 4, r, g, b);
+    gfx.PutPixel(x + 6, y - 3, r, g, b);
+}
+
+void Game::SecondBox()
+{
+    gfx.PutPixel(x2 - 6, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 5, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 4, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 3, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 6, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 6, y2 - 5, r2, g2, b2);
+    gfx.PutPixel(x2 - 6, y2 - 4, r2, g2, b2);
+    gfx.PutPixel(x2 - 6, y2 - 3, r2, g2, b2);
+
+    gfx.PutPixel(x2 + 6, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 5, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 4, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 3, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 6, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 6, y2 + 5, r2, g2, b2);
+    gfx.PutPixel(x2 + 6, y2 + 4, r2, g2, b2);
+    gfx.PutPixel(x2 + 6, y2 + 3, r2, g2, b2);
+
+    gfx.PutPixel(x2 - 6, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 5, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 4, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 3, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 6, y2 + 6, r2, g2, b2);
+    gfx.PutPixel(x2 - 6, y2 + 5, r2, g2, b2);
+    gfx.PutPixel(x2 - 6, y2 + 4, r2, g2, b2);
+    gfx.PutPixel(x2 - 6, y2 + 3, r2, g2, b2);
+
+    gfx.PutPixel(x2 + 6, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 5, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 4, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 3, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 6, y2 - 6, r2, g2, b2);
+    gfx.PutPixel(x2 + 6, y2 - 5, r2, g2, b2);
+    gfx.PutPixel(x2 + 6, y2 - 4, r2, g2, b2);
+    gfx.PutPixel(x2 + 6, y2 - 3, r2, g2, b2);
+}
+
+bool Game::CollisionDetection() const
+{
+    return x <= x2 + 6 && x + 6 >= x2 &&
+        y <= y2 + 6 && y + 6 >= y2;
 }
