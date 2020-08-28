@@ -39,8 +39,7 @@ private:
 	/********************************/
     void Reticle();
     void WallCollision();
-    void FirstBox();
-    void SecondBox();
+    void DrawBox(float x, float y, float r, float g, float b);
     bool CollisionDetection() const;
 private:
 	MainWindow& wnd;
@@ -54,6 +53,8 @@ private:
     float y2;
     float velX;
     float velY;
+    float width = 6.0f;
+    float height = 6.0f;
     float r = int(0.0f);
     float g = int(255.0f);
     float b = int(255.0f);
