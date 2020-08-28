@@ -23,6 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Reticle.h"
 
 class Game
 {
@@ -37,29 +38,12 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
-    void Reticle();
-    void WallCollision();
-    void FirstBox();
-    void SecondBox();
-    bool CollisionDetection() const;
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
 	/********************************/
-    float x;
-    float y;
-    float x2;
-    float y2;
-    float velX;
-    float velY;
-    float r = int(0.0f);
-    float g = int(255.0f);
-    float b = int(255.0f);
-    float r2 = int(255.0f);
-    float g2 = int(0.0f);
-    float b2 = int(255.0f);
-    bool shapeIschanged = false;
-    bool colorIsChaged = false;
+    Reticle mReticle;
+    Reticle mReticle2;
 };
